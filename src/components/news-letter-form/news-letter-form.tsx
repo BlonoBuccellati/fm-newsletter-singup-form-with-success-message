@@ -8,23 +8,23 @@ import InputEmailWithLabel from "@/components/news-letter-form/input-email-with-
 const Title = () => {
   return <h1 className="typo-header">Stay updated!</h1>;
 };
+
+const DescriptionItem = ({ message }: { message: string }) => {
+  return (
+    <li className="flex gap-200">
+      <IconList />
+      <p>{message}</p>
+    </li>
+  );
+};
 const NewsLetterDescription = () => {
   return (
     <div className="space-y-300">
       <p>Join 60,000+ product managers receiving monthly updates on:</p>
       <ul className="space-y-100">
-        <li>
-          <IconList />
-          Product discovery and building what matters
-        </li>
-        <li>
-          <IconList />
-          Measuring to ensure updates are a success
-        </li>
-        <li>
-          <IconList />
-          And much more!
-        </li>
+        <DescriptionItem message="Product discovery and building what matters" />
+        <DescriptionItem message="Measuring to ensure updates are a success" />
+        <DescriptionItem message="And much more!" />
       </ul>
     </div>
   );
