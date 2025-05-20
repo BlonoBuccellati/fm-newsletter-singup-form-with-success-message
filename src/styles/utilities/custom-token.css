@@ -1,0 +1,41 @@
+/* カラー */
+@theme {
+  --color-white: hsl(0, 0%, 100%);
+
+  --color-gray-*: initial;
+  --color-gray: hsl(0, 0%, 58%);
+
+  --color-blue-*: initial;
+  --color-blue-700: hsl(235, 18%, 26%);
+  --color-blue-800: hsl(234, 29%, 20%);
+
+  --color-primary: hsl(4, 100%, 67%);
+  --color-gradient: hsl(15, 100%, 61%);
+}
+
+/* spacing */
+@theme {
+  --spacing-*: initial;
+  --spacing-0: 0;
+  --spacing-100: 0.5rem;
+  --spacing-200: 1rem;
+  --spacing-300: 1.5rem;
+  --spacing-400: 2rem;
+  --spacing-500: 2.5rem;
+  --spacing-600: 3rem;
+  --spacing-700: 3.5rem;
+  --spacing-800: 4rem;
+  --spacing-900: 4.5rem;
+  --spacing-1300: 6.5rem;
+}
+
+@theme {
+  --breakpoint-*: initial;
+  /* @mediaクエリ内ではvar()は許可されないため値を複製 */
+  /* メディアクエリでは、値に応じて、中のスタイルを適用する。
+  つまり、メディアクエリが先に判断していないと、スタイルを適用できないため、実行時に解決されるCSS変数は使うことができない。 */
+  /* 参考URL：https://github.com/tailwindlabs/tailwindcss/discussions/15113 */
+  --breakpoint-mobile: 375px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1440px;
+}

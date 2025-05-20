@@ -1,0 +1,35 @@
+@utility typo-1-bold {
+  font-family: var(--font-roboto);
+  font-weight: var(--font-weight-bold);
+  font-size: 56px;
+  line-height: 100%;
+  letter-spacing: 0;
+}
+@utility typo-1-mobile {
+  font-family: var(--font-roboto);
+  font-weight: var(--font-weight-bold);
+  font-size: 88px;
+  line-height: 100%;
+  letter-spacing: 0;
+}
+@utility typo-2-bold {
+  font-family: var(--font-roboto);
+  font-weight: var(--font-weight-bold);
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0;
+}
+@utility typo-2-regular {
+  font-family: var(--font-roboto);
+  font-weight: var(--font-weight-regular);
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0;
+}
+@utility typo-3-regular {
+  font-family: var(--font-roboto);
+  font-weight: var(--font-weight-bold);
+  font-size: 12px;
+  line-height: 150%;
+  letter-spacing: 0;
+}
