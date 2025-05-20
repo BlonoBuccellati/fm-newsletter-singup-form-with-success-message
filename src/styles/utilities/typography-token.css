@@ -1,7 +1,7 @@
-@utility typo-1-bold {
+@utility typo-header {
   font-family: var(--font-roboto);
   font-weight: var(--font-weight-bold);
-  font-size: 56px;
+  font-size: clamp(2.5rem, 1.556rem + 4.05vw, 3.5rem);
   line-height: 100%;
   letter-spacing: 0;
 }

@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import InputEmailWithLabel from "@/components/news-letter-form/input-email-with-label";
 
 const Title = () => {
-  return <h1 className="typo-1-bold">Stay updated!</h1>;
+  return <h1 className="typo-header">Stay updated!</h1>;
 };
 const NewsLetterDescription = () => {
   return (
