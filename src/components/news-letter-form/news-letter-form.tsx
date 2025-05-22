@@ -4,6 +4,9 @@ import { IconList } from "@/assets";
 import { Button } from "@/components/ui/button";
 
 import InputEmailWithLabel from "@/components/news-letter-form/input-email-with-label";
+import { useState } from "react";
+import { createPortal } from "react-dom";
+import NewsLetterModal from "./news-letter-modal";
 
 const Title = () => {
   return <h1 className="typo-header">Stay updated!</h1>;
@@ -30,38 +33,56 @@ const NewsLetterDescription = () => {
   );
 };
 
-const Form = () => {
+const Form = ({ event }: { event: (e: React.MouseEvent) => void }) => {
   return (
     <div className="tablet:space-y-200 tablet:pb-0 space-y-300 pt-200 pb-400">
       <InputEmailWithLabel />
-      <Button>Subscribe to monthly newsletter</Button>
+      <Button onClick={event}>Subscribe to monthly newsletter</Button>
     </div>
   );
 };
 const NewsLetterForm = () => {
   //  sing up form
+  const [isOpen, setIsOpen] = useState(false);
+  const openModal = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsOpen(true);
+  };
+  const closeModal = () => setIsOpen(false);
+
+  console.log(isOpen);
   return (
-    <form className="tablet:p-500 tablet:rounded-2xl desktop:flex desktop:flex-row-reverse desktop:max-w-fit desktop:p-400 desktop:gap-800 desktop:space-y-0 relative mx-auto max-w-[608px] space-y-500 bg-white">
-      <picture>
-        <source
-          media="(min-width:1440px)"
-          srcSet="assets/illustration-sign-up-desktop.svg"
-        />
-        <Image
-          width={40}
-          height={40}
-          alt=""
-          src="assets/illustration-sign-up-mobile.svg"
-          className="tablet:rounded-2xl tablet:object-fill desktop:mb-0 mx-auto mb-500 w-full object-cover"
-        />
-      </picture>
-      {/* content */}
-      <div className="tablet:max-w-full desktop:w-[70%] desktop:max-w-[376px] desktop:h-auto desktop:my-auto mx-auto max-w-[90%] space-y-300">
-        <Title />
-        <NewsLetterDescription />
-        <Form />
-      </div>
-    </form>
+    <>
+      <form className="tablet:p-500 tablet:rounded-2xl desktop:flex desktop:flex-row-reverse desktop:max-w-fit desktop:p-400 desktop:gap-800 desktop:space-y-0 mx-auto max-w-[608px] space-y-500 bg-white">
+        <picture>
+          <source
+            media="(min-width:1440px)"
+            srcSet="assets/illustration-sign-up-desktop.svg"
+          />
+          <Image
+            width={40}
+            height={40}
+            alt=""
+            src="assets/illustration-sign-up-mobile.svg"
+            className="tablet:rounded-2xl tablet:object-fill desktop:mb-0 mx-auto mb-500 w-full object-cover"
+          />
+        </picture>
+        {/* content */}
+        <div className="tablet:max-w-full desktop:w-[70%] desktop:max-w-[376px] desktop:h-auto desktop:my-auto mx-auto max-w-[90%] space-y-300">
+          <Title />
+          <NewsLetterDescription />
+          <Form event={openModal} />
+        </div>
+      </form>
+      {isOpen &&
+        createPortal(
+          <NewsLetterModal
+            address="ash@loremcompany.com"
+            onClose={closeModal}
+          />,
+          document.body,
+        )}
+    </>
   );
 };
 
