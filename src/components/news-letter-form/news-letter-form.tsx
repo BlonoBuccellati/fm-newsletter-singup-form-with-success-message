@@ -1,12 +1,6 @@
-"use client";
 import Image from "next/image";
 import { IconList } from "@/assets";
-import { Button } from "@/components/ui/button";
-
-import InputEmailWithLabel from "@/components/news-letter-form/input-email-with-label";
-import { useState } from "react";
-import { createPortal } from "react-dom";
-import NewsLetterModal from "./news-letter-modal";
+import SignUpForm from "./sign-up-form";
 
 const Title = () => {
   return <h1 className="typo-header">Stay updated!</h1>;
@@ -33,24 +27,7 @@ const NewsLetterDescription = () => {
   );
 };
 
-const Form = ({ event }: { event: (e: React.MouseEvent) => void }) => {
-  return (
-    <div className="tablet:space-y-200 tablet:pb-0 space-y-300 pt-200 pb-400">
-      <InputEmailWithLabel />
-      <Button onClick={event}>Subscribe to monthly newsletter</Button>
-    </div>
-  );
-};
 const NewsLetterForm = () => {
-  //  sing up form
-  const [isOpen, setIsOpen] = useState(false);
-  const openModal = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setIsOpen(true);
-  };
-  const closeModal = () => setIsOpen(false);
-
-  console.log(isOpen);
   return (
     <>
       <form className="tablet:p-500 tablet:rounded-2xl desktop:flex desktop:flex-row-reverse desktop:max-w-fit desktop:p-400 desktop:gap-800 desktop:space-y-0 mx-auto max-w-[608px] space-y-500 bg-white">
@@ -71,17 +48,9 @@ const NewsLetterForm = () => {
         <div className="tablet:max-w-full desktop:w-[70%] desktop:max-w-[376px] desktop:h-auto desktop:my-auto mx-auto max-w-[90%] space-y-300">
           <Title />
           <NewsLetterDescription />
-          <Form event={openModal} />
+          <SignUpForm />
         </div>
       </form>
-      {isOpen &&
-        createPortal(
-          <NewsLetterModal
-            address="ash@loremcompany.com"
-            onClose={closeModal}
-          />,
-          document.body,
-        )}
     </>
   );
 };

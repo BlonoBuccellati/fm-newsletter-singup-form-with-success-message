@@ -1,11 +1,22 @@
+"use client";
+
 import { IconSuccess } from "@/assets";
 import { Button } from "../ui/button";
+import { useEffect } from "react";
 
 interface NewsLetterModalProps {
   address: string;
   onClose: () => void;
 }
 const NewsLetterModal = ({ address, onClose }: NewsLetterModalProps) => {
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      // クリーンアップ
+      document.body.style.overflow = "";
+    };
+  }, []);
   return (
     // コンテナ
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-blue-700">
