@@ -1,17 +1,18 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-
 import { useState } from "react";
 import { createPortal } from "react-dom";
 import NewsLetterModal from "./news-letter-modal";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
+import { SubmittedSchema } from "@/lib/schemas";
+import { z } from "zod";
 
-interface InputEmailWithLabel {
-  email: string;
-  setEmail: (value: React.SetStateAction<string>) => void;
+type Email = z.infer<typeof SubmittedSchema>;
+interface InputEmailWithLabel extends Email {
+  setEmail: (e: React.ChangeEvent<HTMLInputElement>) => void;
   errorMessage: string;
 }
 const InputEmailWithLabel = ({
@@ -30,7 +31,7 @@ const InputEmailWithLabel = ({
           type="email"
           id="email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={setEmail}
           placeholder="email@company.com"
           className={cn(
             "placeholder-gray border-gray w-full rounded-lg border px-300 py-200 focus:border-blue-800 focus:outline-none",
@@ -51,31 +52,41 @@ const SignUpForm = () => {
   //  sing up form
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
-  const [submitted, setSubmitted] = useState(false);
+  const [modal, setModal] = useState(false);
   const openModal = (e: React.MouseEvent) => {
     e.preventDefault();
-    if (!email.includes("@")) {
-      setError("Valid email required");
+    const result = SubmittedSchema.safeParse({ email: email });
+
+    if (!result.success) {
+      const message = result.error.flatten().fieldErrors.email;
+      setError(message ? message.toString() : "");
       return;
     }
     setError("");
-    setSubmitted(true);
+    setEmail("");
+    setModal(true);
   };
-  const closeModal = () => setSubmitted(false);
+  const closeModal = () => setModal(false);
+  const changeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.value) {
+      setError("");
+    }
+    setEmail(e.target.value);
+  };
 
   return (
     <>
       <div className="tablet:space-y-200 tablet:pb-0 space-y-300 pt-200 pb-400">
         <InputEmailWithLabel
           email={email}
-          setEmail={setEmail}
+          setEmail={changeEmail}
           errorMessage={error}
         />
         <Button type="submit" onClick={openModal}>
           Subscribe to monthly newsletter
         </Button>
       </div>
-      {submitted &&
+      {modal &&
         createPortal(
           <NewsLetterModal
             address="ash@loremcompany.com"
