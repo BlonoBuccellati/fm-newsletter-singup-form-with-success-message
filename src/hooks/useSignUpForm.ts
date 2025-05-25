@@ -22,11 +22,13 @@ export function useSignUpForm() {
     }
 
     setError("");
-    setEmail("");
     setModal(true);
   };
 
-  const closeModal = () => setModal(false);
+  const closeModal = () => {
+    setEmail("");
+    setModal(false);
+  };
 
   return {
     email,
