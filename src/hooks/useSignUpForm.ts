@@ -6,6 +6,16 @@ export function useSignUpForm() {
   const [error, setError] = useState("");
   const [modal, setModal] = useState(false);
 
+  const validationEmail = (email: string): boolean => {
+    const validationFields = SubmittedSchema.safeParse({ email });
+    if (!validationFields.success) {
+      const message = validationFields.error.flatten().fieldErrors.email;
+      setError(message?.toString() ?? "");
+      return false;
+    }
+    setError("");
+    return true;
+  };
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
     if (!e.target.value) setError("");
@@ -14,14 +24,10 @@ export function useSignUpForm() {
   const handleSubmit = (e: React.MouseEvent) => {
     e.preventDefault();
 
-    const result = SubmittedSchema.safeParse({ email });
-    if (!result.success) {
-      const message = result.error.flatten().fieldErrors.email;
-      setError(message?.toString() ?? "");
+    if (!validationEmail(email)) {
       return;
     }
 
-    setError("");
     setModal(true);
   };
 
