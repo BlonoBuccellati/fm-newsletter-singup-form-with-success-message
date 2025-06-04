@@ -34,7 +34,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Frontend Mentor Solution](https://www.frontendmentor.io/challenges/tip-calculator-app-ugJNGbJUX)
+- Solution URL: [Frontend Mentor Solution](https://www.frontendmentor.io/challenges/newsletter-signup-form-with-success-message-3FC1AZbNrv)
 - Live Site URL: [Deployed on Vercel](https://fm-newsletter-singup-form-with-success-message-e8kt.vercel.app/)
 
 ## My process
