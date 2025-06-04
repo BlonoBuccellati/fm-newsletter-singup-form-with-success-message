@@ -5,7 +5,7 @@ import NewsLetterModal from "./news-letter-modal";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
-import { useSignUpForm } from "@/hooks/useSignUpForm";
+import { useSignUpForm } from "@/hooks/use-sign-up-form";
 
 interface InputWithLabelProps {
   value: string;
